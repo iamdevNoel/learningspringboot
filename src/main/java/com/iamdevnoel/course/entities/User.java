@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_user")
+@Entity // JPA converte esta classe (Orientação a Objeto) em entity (modelo relacional)
+@Table(name = "tb_user") // Especifica qual será o nome da classe como tabela SQL
 public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Explica ao JPA que esse atributo será o ID da tabela SQL
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Faz o JPA autoincrementar a numeração ID
     private Long id;
     private String name;
     private String email;
