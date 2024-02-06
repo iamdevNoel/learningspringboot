@@ -1,5 +1,6 @@
 package com.iamdevnoel.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +19,10 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore // essa annotation evita loopings entre duas classes associadas
+    // Neste caso, todo user tem uma order, e toda order tem um user
+    // e isso pode gerar um loop ao tentar exibir um user que tem uma order, que tem um user, que tem uma order...
+    // recomenda-se que esta annotation fique na classe de relacionamento Um-Para-Muitos
     @OneToMany(mappedBy = "client") // tipo de relacionamento entre objetos (um para muitos)
     // conectado pelo atributo client lá na outra classe
     private List<Order> orders = new ArrayList<>();
