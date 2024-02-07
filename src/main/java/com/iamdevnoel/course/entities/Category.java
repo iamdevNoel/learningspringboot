@@ -1,5 +1,6 @@
 package com.iamdevnoel.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,7 +16,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient // impede que o JPA tente interpretar este atributo, este atrib. será tratado no próximo commit
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories") // relacionamento conectado pelo atributo categories da classe Product
     private Set<Product> products = new HashSet<>();
 
     public Category() {
@@ -42,6 +44,9 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     @Override
     public boolean equals(Object o) {

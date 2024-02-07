@@ -18,7 +18,15 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(
+            // tabela de associações no JPA entre products e categories
+            name = "tb_product_category",
+            // define chave estrangeira para tb_product
+            joinColumns = @JoinColumn(name = "product_id"),
+            // define chave estrangeira para tb_category
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
@@ -70,6 +78,10 @@ public class Product implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
