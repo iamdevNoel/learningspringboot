@@ -29,6 +29,9 @@ public class Product implements Serializable {
     )
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Product() {
     }
 
@@ -82,6 +85,19 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    // de acordo com as regras de negócio do projeto, não é interessante saber em quais OrderItems
+    // a classe Product participou. Basta apenas saber em quais Orders ela participou.
+    // no entanto, pelo diagrama UML do projeto, a classe OrderItem fica entre as classes Product e Order
+    // então nesta classe foi criado um atributo OrderItem unicamente com a inteção de acessar os Orders
+    // por meio do método getOrder que está dentro da classe OrderItem
+    public Set<Order> getOrders() {
+        Set<Order> orderSet = new HashSet<>();
+        for (OrderItem item : items) {
+            orderSet.add(item.getOrder());
+        }
+        return orderSet;
     }
 
     @Override
