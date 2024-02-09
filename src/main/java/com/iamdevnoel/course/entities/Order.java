@@ -25,9 +25,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id") // informando qual o nome da chave estrangeira
     // irá conectar as duas classes
     private User client;
+
     @OneToMany(mappedBy = "id.order")
     // O atributo Order na verdade está dentro do atributo OrderItemPK, nomeada de "id"
     private Set<OrderItem> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    // nesta associação, um order pode OU NÃO ter um payment. Caso tenha um payment,
+    // é necessário que paymente e order tenham o mesmo id
+    private Payment payment;
 
     public Order () {}
 
@@ -74,6 +80,14 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems() {
         return items;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
