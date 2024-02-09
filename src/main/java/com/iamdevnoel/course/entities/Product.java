@@ -1,5 +1,6 @@
 package com.iamdevnoel.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -92,6 +93,7 @@ public class Product implements Serializable {
     // no entanto, pelo diagrama UML do projeto, a classe OrderItem fica entre as classes Product e Order
     // então nesta classe foi criado um atributo OrderItem unicamente com a inteção de acessar os Orders
     // por meio do método getOrder que está dentro da classe OrderItem
+    @JsonIgnore
     public Set<Order> getOrders() {
         Set<Order> orderSet = new HashSet<>();
         for (OrderItem item : items) {
