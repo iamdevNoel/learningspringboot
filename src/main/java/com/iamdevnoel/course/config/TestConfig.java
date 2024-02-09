@@ -27,7 +27,7 @@ public class TestConfig implements CommandLineRunner {
     private OrderItemRepository orderItemRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Category cat1 = new Category(null, "Electronics");
         Category cat2 = new Category(null, "Books");
         Category cat3 = new Category(null, "Computers");

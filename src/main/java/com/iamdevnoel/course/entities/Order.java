@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +19,7 @@ public class Order implements Serializable {
     // annotation que força o instant a ser exibido no padrão ISO
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
-    private int orderStatus;
+    private Integer orderStatus;
 
     @ManyToOne // tipo de relacionamento entre objetos (muitos para um)
     @JoinColumn(name = "client_id") // informando qual o nome da chave estrangeira
