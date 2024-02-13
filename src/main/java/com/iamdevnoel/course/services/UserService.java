@@ -22,4 +22,9 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         return user.get();
     }
+
+    public User insert(User user) {
+        return userRepository.save(user);
+        //o método save() retorna o tipo de objeto que ele está salvando
+    }
 }
