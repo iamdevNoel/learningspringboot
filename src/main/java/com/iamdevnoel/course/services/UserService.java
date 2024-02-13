@@ -27,4 +27,8 @@ public class UserService {
         return userRepository.save(user);
         //o método save() retorna o tipo de objeto que ele está salvando
     }
+
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
 }
