@@ -2,8 +2,8 @@ package com.iamdevnoel.course.services;
 
 import com.iamdevnoel.course.entities.User;
 import com.iamdevnoel.course.repositories.UserRepository;
+import com.iamdevnoel.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +20,9 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.get();
+        return user.orElseThrow(
+                () -> new ResourceNotFoundException(id)
+        );
     }
 
     public User insert(User user) {
